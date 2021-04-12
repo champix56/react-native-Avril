@@ -36,9 +36,10 @@ const Auth = (props) => {
         console.log(state);
         console.log(`http://desorbaix.alexandre.free.fr/phpRest/users/?login=${state.login}&password=${state.password}`);
         fetch(`http://desorbaix.alexandre.free.fr/phpRest/users/?login=${state.login}&password=${state.password}`)
-          .then(r => r.text())
+          .then(r => r.json())
           .then(o => {
             console.log(o);
+            console.log(o.length);
             if (o.length === 0) { setstate({ login: '', password: '' }) }
             else { props.onvalidauth(); }
           })
