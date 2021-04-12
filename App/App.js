@@ -11,10 +11,14 @@ export default class componentName extends React.Component {
     this.state = { window: <SplashScreen onfinish={() => this.endsplash()} /> }
   }
   endsplash() {
-    this.setState({ window: <Auth onvalidauth={()=>this.isAuthent()} /> })
+    this.setState({ window: <Auth onvalidauth={() => this.isAuthent()} /> })
   }
   isAuthent() {
-    this.setState({ window: <Main /> })
+    this.setState({
+      window: <Main disconnect={() => {
+        this.setState({ window: <Auth onvalidauth={() => this.isAuthent()} /> })
+      }} />
+    })
   }
   render() {
     return (
