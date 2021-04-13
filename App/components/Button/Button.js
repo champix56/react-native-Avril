@@ -6,8 +6,8 @@ import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 export default function Button(props) {
   console.log(props.bgcolor)
   return (
-    <View>
-      <TouchableHighlight onPress={props.onclick} data-testid="Button" style={{ ...style.container, backgroundColor: props.bgcolor }}>
+    <View data-testid="Button">
+      <TouchableHighlight onPress={props.onclick}  style={{ ...style.container, backgroundColor: props.bgcolor }}>
         <Text style={style.contentText}>{props.text}</Text>
       </TouchableHighlight>
     </View>
