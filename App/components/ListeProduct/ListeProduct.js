@@ -1,11 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableHighlight } from 'react-native';
 import l from '../SplashScreen/img';
+import store from '../../store/store';
+import { PRODUCTS_ACTIONS_TYPE } from '../../store/reducerProduct';
+
 function ListeProduct(props) {
-  // console.log(l);
   return (
-    <View style={{ padding: 15 }}>
+    <TouchableHighlight style={{ padding: 15 }} onPress={()=>{
+      store.dispatch({type:PRODUCTS_ACTIONS_TYPE.SELECT_PRODUCT,value:props.product})
+    }}>
+    <View style={{alignItems:'center'}}>
+
         <Image
           style={{
             width: 50,
@@ -13,7 +19,8 @@ function ListeProduct(props) {
           }}
           source={{ uri: props.product.img }} />
         <Text>{props.product.id + ':' + props.product.name}</Text>
-      </View>
+        </View>
+      </TouchableHighlight>
   );
 }
 
