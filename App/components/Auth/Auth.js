@@ -1,29 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Button as Button2, StyleSheet } from 'react-native';
 import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 import { TextInput } from 'react-native';
 import { REST_SRV } from '../../config/config';
+import store from '../../store/store';
+import { CORE_ACTIONS_TYPE } from '../../store/reducer';
 function Auth(props) {
   const [loginDatas, setloginDatas] = useState({ login: 'alex', password: 'a' });
+  
+  useEffect(() => {
+    setloginDatas({login: store.getState().core.login, password:store.getState().core.password});
+    store.subscribe(()=>{
+      setloginDatas({login: store.getState().core.login, password:store.getState().core.password});
+    })
+},[]);
 
   function makeAuth() {
     //console.log(loginDatas);
-    const url = `${REST_SRV}/users?login=${loginDatas.login}&password=${loginDatas.password}`;
-    //console.log(url);
-    fetch(url)
-      .then(returnedFlow => returnedFlow.json(),()=>[])
-      .then(objet => {
-        if (Array.isArray(objet) && objet.length > 0) {
-          console.log('connect ok as ' + objet[0].login);
-          props.onConnect(objet[0].login)
-        }
-        else {
-          setloginDatas({ password: '', login: '' });
-          console.log('connect ERROR');
-        }
-        return objet;
-      });
+   store.dispatch({type:CORE_ACTIONS_TYPE.MAKE_AUTHENT})
   }
 
   return (
@@ -31,10 +26,12 @@ function Auth(props) {
       <View style={style.container}>
         <Text>Authentification</Text>
         <TextInput value={loginDatas.login} onChangeText={(value) => {
-          setloginDatas({ ...loginDatas, login: value });
+          //setloginDatas({ ...loginDatas, login: value });
+          store.dispatch({type:CORE_ACTIONS_TYPE.SET_LOGIN,value:value})
         }} placeholder={'Login'}></TextInput>
         <TextInput value={loginDatas.password} onChangeText={(value) => {
-          setloginDatas({ ...loginDatas, password: value });
+          // setloginDatas({ ...loginDatas, password: value });
+          store.dispatch({type:CORE_ACTIONS_TYPE.SET_PASSWORD,value:value})
         }} secureTextEntry={true} placeholder={'Password'}></TextInput>
         <Button text="connect" onclick={() => { makeAuth() }} />
         {/* <Button2 title="connect" onPress={ } /> */}
