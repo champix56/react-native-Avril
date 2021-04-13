@@ -9,7 +9,7 @@ import Main from './components/Main/Main';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { window: <SplashScreen onFinishSplash={() => this.onSplashFinish()} /> }
+    this.state = {login:undefined, window: <SplashScreen onFinishSplash={() => this.onSplashFinish()} /> }
   }
   /**
    * Change la fenetre a la fin du splashScreen
@@ -20,8 +20,8 @@ export default class App extends React.Component {
   /**
    * change la fenetre a la fin de la connexion
    */
-  onSuccessConnect() {
-    this.setState({ window: <Main /> })
+  onSuccessConnect(login) {
+    this.setState({ window: <Main />, login:login })
 
   }
   render() {

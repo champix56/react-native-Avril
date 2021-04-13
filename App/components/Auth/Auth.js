@@ -16,7 +16,7 @@ function Auth(props) {
       .then(objet => {
         if (Array.isArray(objet) && objet.length > 0) {
           console.log('connect ok as ' + objet[0].login);
-          props.onConnect()
+          props.onConnect(objet[0].login)
         }
         else {
           setloginDatas({ password: '', login: '' });
