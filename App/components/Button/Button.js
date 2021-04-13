@@ -4,9 +4,9 @@ import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 // import { TouchableHighlight } from 'react-native-gesture-handler';
 
 export default function Button(props) {
-  console.log(props.bgcolor)
+  // console.log(props.bgcolor)
   return (
-    <View data-testid="Button">
+    <View testid="Button">
       <TouchableHighlight onPress={props.onclick}  style={{ ...style.container, backgroundColor: props.bgcolor }}>
         <Text style={style.contentText}>{props.text}</Text>
       </TouchableHighlight>
