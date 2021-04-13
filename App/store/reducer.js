@@ -1,11 +1,12 @@
 import { REST_SRV } from "../config/config";
 import store from "./store";
-
-export const initialState={window:null,login:'',password:'', isGranted:false};
+import Main from "../components/Main/Main";
+export const initialState={window:null,login:'alex',password:'a', isGranted:false,isAuthChecked:false};
 export const CORE_ACTIONS_TYPE=Object.freeze({
     SET_PASSWORD:'SET_PASSWORD',
     SET_LOGIN:'SET_LOGIN',
-    MAKE_AUTHENT:'MAKE_AUTHENT'
+    MAKE_AUTHENT:'MAKE_AUTHENT',
+    CHANGE_WINDOW:'CHANGE_WINDOW'
 })
 const PRIVATE_CORE_ACTIONS_TYPE=Object.freeze({
     GRANTED_AUTH:'GRANTED',
@@ -17,7 +18,8 @@ export default function reducer(state=initialState,action){
         case PRIVATE_CORE_ACTIONS_TYPE.GRANTED_AUTH:return {...state, isGranted:true}
         case PRIVATE_CORE_ACTIONS_TYPE.DENY_AUTH:return {...state, login:'',password:''}
         //actions public pour l'app
-        case CORE_ACTIONS_TYPE.MAKE_AUTHENT:
+        case CORE_ACTIONS_TYPE.CHANGE_WINDOW:return {...state,window:action.value}
+            case CORE_ACTIONS_TYPE.MAKE_AUTHENT:
             const url = `${REST_SRV}/users?login=${state.login}&password=${state.password}`;
             console.log(url);
             fetch(url)

@@ -8,16 +8,17 @@ import store from '../../store/store';
 import { CORE_ACTIONS_TYPE } from '../../store/reducer';
 function Auth(props) {
   const [loginDatas, setloginDatas] = useState({ login: 'alex', password: 'a' });
-  
+
   useEffect(() => {
     setloginDatas({login: store.getState().core.login, password:store.getState().core.password});
     store.subscribe(()=>{
       setloginDatas({login: store.getState().core.login, password:store.getState().core.password});
     })
 },[]);
-
+  useEffect(() => {
+    if(store.getState().core.isGranted)props.onConnect(); 
+  });
   function makeAuth() {
-    //console.log(loginDatas);
    store.dispatch({type:CORE_ACTIONS_TYPE.MAKE_AUTHENT})
   }
 
@@ -59,7 +60,7 @@ const style = StyleSheet.create({
 })
 
 Auth.propTypes = {
-  onConnect: PropTypes.func.isRequired
+ onConnect: PropTypes.func.isRequired
 };
 
 Auth.defaultProps = {};
