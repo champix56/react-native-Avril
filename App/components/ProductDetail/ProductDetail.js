@@ -18,7 +18,7 @@ function ProductDetail(props) {
         </View>
       </View>
 
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 , alignContent:'center', alignItems:'center'}}>
         <Image source={{ uri: props.selected.img }} style={{ height: 100, width: 100 }} />
       </View>
       <View style={{ flex: 1, flexDirection: 'column' }}>

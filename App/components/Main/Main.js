@@ -6,7 +6,6 @@ import Liste from '../Liste/Liste';
 function Main() {
   return (
     <View>
-      <Text>Main</Text>
       <Liste/>
      </View>
   );
