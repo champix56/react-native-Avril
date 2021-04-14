@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { View, Text } from 'react-native';
+import Liste from '../Liste/Liste';
 
 function Main() {
   return (
     <View>
-      <Text>Main</Text>
+      <Liste/>
      </View>
   );
 }
